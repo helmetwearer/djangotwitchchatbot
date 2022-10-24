@@ -2,19 +2,19 @@ This app needs documentation still. Initial code checkin, will add later.
 
 
 Install the reqs (probably should set up a virtualenv etc):
-pip install -r requirements.txt
+    pip install -r requirements.txt
 
 Create a superuser:
-manage.py createsuperuser
+    manage.py createsuperuser
 
 Run the web server:
-manage.py runserver
+    manage.py runserver
 
 (for production webserver this is a great guide: https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-django-with-postgres-nginx-and-gunicorn)
 
 
 Go to the admin and login:
-http://127.0.0.1:8000/admin
+    http://127.0.0.1:8000/admin
 
 For each channel you want the bot to monitor, create a channel object
 
@@ -44,5 +44,5 @@ For bot specific configurables check the settings here:
 https://github.com/helmetwearer/djangotwitchchatbot/blob/main/helmetbot/settings.py#L116
 
 Highly encouraged to use a local_settings.py file for stuff like:
-TWITCH_HANDLE = 'your_twitch_user_name'
-TWITCH_OAUTH_TOKEN = 'go here to get an oauth token: https://twitchapps.com/tmi/'
+    TWITCH_HANDLE = 'your_twitch_user_name'
+    TWITCH_OAUTH_TOKEN = 'go here to get an oauth token: https://twitchapps.com/tmi/'

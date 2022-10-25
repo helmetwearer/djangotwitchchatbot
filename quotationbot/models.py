@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 import requests
 
 class BaseModel(models.Model):
@@ -56,3 +57,7 @@ class Channel(BaseModel):
 	def is_live(self):
 		r = requests.get(url=settings.TWITCH_UPTIME_URL+self.name)
 		return not('offline' in str(r.content))
+
+	def mark_to_run(self):
+		self.available_to_message_after = timezone.now()
+		self.save()

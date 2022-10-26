@@ -118,15 +118,15 @@ TWITCH_IRC_ADDRESS = 'irc.chat.twitch.tv'
 TWITCH_IRC_PORT = 6667
 TWITCH_HANDLE = 'your_twitch_user_name'
 TWITCH_OAUTH_TOKEN = 'go here to get an oauth token: https://twitchapps.com/tmi/'
-TWITCH_IRC_MAX_LENGTH = 500
+TWITCH_IRC_MAX_LENGTH = 500 #this length probably needs to be tested
 TWITCH_UPTIME_URL = 'https://decapi.me/twitch/uptime/'
 
 #infrequent defaults
-BOT_MINIMUM_WAIT_MINUTES = 60
-BOT_MAXIMUM_WAIT_MINUTES = 120
-BOT_DEFAULT_BUCKETS = ['wizdum']
-QUOTATION_TIME_INTERVAL = 30
-BOT_IGNORE_ERRORS = False
+BOT_MINIMUM_WAIT_MINUTES = 60 # default min for a channel
+BOT_MAXIMUM_WAIT_MINUTES = 120 # default max for a channel
+BOT_DEFAULT_BUCKETS = ['wizdum'] #default buckets to split your quotes into
+QUOTATION_TIME_INTERVAL = 5 * 60 #five minutes downtime in between runs. 
+BOT_IGNORE_ERRORS = False # when enabled the bot will ignore runtime exceptions when it can
 
 #default 10 minute uptime before channel considered 'live'
 MINIMUM_CHANNEL_UPTIME_SECONDS = 10 * 60

@@ -58,14 +58,24 @@ class Channel(BaseModel):
 		r = requests.get(url=settings.TWITCH_UPTIME_URL+self.name)
 		s = str(r.content)
 		print(s)
-		time_regex = re.search(r"(\d+)\s+.*,\s+(\d+)\s+.*,\s+(\d+)", s)
-		print(time_regex)
-		if time_regex is None:
+		three_part_time_regex = re.search(r"(\d+)\s+.*,\s+(\d+)\s+.*,\s+(\d+)", s)
+		two_part_time_regex = re.search(r"(\d+)\s+.*,\s+(\d+)", s)
+		print(three_part_time_regex)
+		print(two_part_time_regex)
+		if three_part_time_regex is None and two_part_time_regex is None:
 			return False
-		(hrs, mins, scnds) = time_regex.groups()
-		total_seconds = int(hrs) * 60 * 60 + int(mins) * 60 + int(scnds)
-		print (total_seconds)
-		return total_seconds > settings.MINIMUM_CHANNEL_UPTIME_SECONDS
+		if three_part_time_regex:
+			(hrs, mins, scnds) = three_part_time_regex.groups()
+			total_seconds = int(hrs) * 60 * 60 + int(mins) * 60 + int(scnds)
+			print (total_seconds)
+			return total_seconds > settings.MINIMUM_CHANNEL_UPTIME_SECONDS
+		if two_part_time_regex:
+			(mins, scnds) = two_part_time_regex.groups()
+			total_seconds = int(mins) * 60 + int(scnds)
+			print (total_seconds)
+			return total_seconds > settings.MINIMUM_CHANNEL_UPTIME_SECONDS
+
+		return False
 
 	def mark_to_run(self):
 		self.available_to_message_after = timezone.now()

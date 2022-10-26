@@ -72,12 +72,15 @@ class Command(BaseCommand):
         for channel in channels:
             self.verbose_write('checking channel %s' % channel.name)
             if channel.is_live:
-                self.verbose_write('%s came back as live, send a message' % channel.name)
-                self.send_random_quotation_to_channel(channel, bucket_name)
-                channel.available_to_message_after = timezone.now() + timezone.timedelta(
-                    minutes=random.randrange(channel.bot_minimum_minutes, channel.bot_maximum_minutes + 1))
-                channel.save()
-                self.verbose_write('%s set to run after %s' % (channel.name, channel.available_to_message_after))
+                self.verbose_write('%s came back as live, check if bucket is on' % channel.name)
+                if channel.is_bucket_enabled(bucket_name):
+                    self.send_random_quotation_to_channel(channel, bucket_name)
+                    channel.available_to_message_after = timezone.now() + timezone.timedelta(
+                        minutes=random.randrange(channel.bot_minimum_minutes, channel.bot_maximum_minutes + 1))
+                    channel.save()
+                    self.verbose_write('%s set to run after %s' % (channel.name, channel.available_to_message_after))
+                else:
+                    self.verbose_write('%s bucket not enabled on %s' % (bucket_name, channel.name))
 
     def handle(self, *args, **options):
         self.verbose_on = options['verbose']
@@ -118,7 +121,4 @@ class Command(BaseCommand):
             except KeyboardInterrupt:
                 self.stdout.write(self.style.SUCCESS('Stopped server. Keyboard interrupt'))
 
-
-        
-
-        
+       

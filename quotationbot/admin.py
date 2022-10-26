@@ -11,7 +11,7 @@ admin.site.register(Quotation, QuotationAdmin)
 
 
 class ChannelAdmin(admin.ModelAdmin):
-    fields = ('name', 'bots_enabled', 'bot_minimum_minutes', 'bot_maximum_minutes')
+    fields = ('name', 'bots_enabled', 'bot_minimum_minutes', 'bot_maximum_minutes', 'enabled_buckets')
     list_display = ('id', 'name', 'bots_enabled')
     search_fields = ('name',)
     

@@ -42,16 +42,22 @@ class Quotation(BaseModel):
 		formatted = formatted.replace('\r', '').replace('\n', '')
 		return str(formatted[0:settings.TWITCH_IRC_MAX_LENGTH])
 
+def default_enabled_buckets():
+	buckets = ''
+	for bucket in settings.BOT_DEFAULT_BUCKETS:
+		buckets += bucket + '\n'
+	return buckets
+
 class Channel(BaseModel):
 	name = models.CharField(max_length=100)
 	bots_enabled = models.BooleanField(default=False)
 	bot_minimum_minutes = models.IntegerField(default=settings.BOT_MINIMUM_WAIT_MINUTES)
 	bot_maximum_minutes = models.IntegerField(default=settings.BOT_MAXIMUM_WAIT_MINUTES)
 	available_to_message_after = models.DateTimeField(auto_now_add=True)
-	enabled_buckets = models.TextField()
+	enabled_buckets = models.TextField(default=default_enabled_buckets())
 
-	def in_enabled_buckets(self, quotation):
-		return quotation.bucket_name in self.enabled_buckets.split()
+	def is_bucket_enabled(self, bucket_name):
+		return bucket_name in self.enabled_buckets.split()
 
 	@property
 	def is_live(self):

@@ -7,11 +7,11 @@ Install the reqs (probably should set up a virtualenv etc):
 
 Create a superuser:
 
-    manage.py createsuperuser
+    ./manage.py createsuperuser
 
 Run the web server:
 
-    manage.py runserver
+    ./manage.py runserver
 
 (for production webserver this is a great guide): 
 
@@ -42,16 +42,17 @@ In order for the quote to be in the random pool the approved flag must be checke
 
 To start the chatbot:
 
-    manage.py quotationbot --verbose --ignore
+    ./manage.py quotationbot --verbose --ignore
     
 or
 
-    manage.py quotationbot bucketname1 bucketname2 bucketname3 --verbose --ignore
+    ./manage.py quotationbot bucketname1 bucketname2 bucketname3 --verbose --ignore
 
 If no bucket names are passed it will use the setting BOT_DEFAULT_BUCKETS
 
 For bot specific configurables check the settings here:
-https://github.com/helmetwearer/djangotwitchchatbot/blob/main/helmetbot/settings.py#L116
+
+    https://github.com/helmetwearer/djangotwitchchatbot/blob/main/helmetbot/settings.py#L116
 
 Highly encouraged to use a local_settings.py file for stuff like:
 

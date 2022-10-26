@@ -121,12 +121,15 @@ TWITCH_OAUTH_TOKEN = 'go here to get an oauth token: https://twitchapps.com/tmi/
 TWITCH_IRC_MAX_LENGTH = 500
 TWITCH_UPTIME_URL = 'https://decapi.me/twitch/uptime/'
 
-BOT_MINIMUM_WAIT_MINUTES = 8
-BOT_MAXIMUM_WAIT_MINUTES = 15
+#infrequent defaults
+BOT_MINIMUM_WAIT_MINUTES = 60
+BOT_MAXIMUM_WAIT_MINUTES = 120
 BOT_DEFAULT_BUCKETS = ['wizdum']
 QUOTATION_TIME_INTERVAL = 30
 BOT_IGNORE_ERRORS = False
 
+#default 10 minute uptime before channel considered 'live'
+MINIMUM_CHANNEL_UPTIME_SECONDS = 10 * 60
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 

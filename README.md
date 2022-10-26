@@ -13,8 +13,13 @@ Run the web server:
 
     manage.py runserver
 
-(for production webserver this is a great guide: https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-django-with-postgres-nginx-and-gunicorn)
+(for production webserver this is a great guide): 
 
+    https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-django-with-postgres-nginx-and-gunicorn)
+
+and you should probably include supervisord with that:
+
+    https://www.agiliq.com/blog/2014/05/supervisor-with-django-and-gunicorn/
 
 Go to the admin and login:
 

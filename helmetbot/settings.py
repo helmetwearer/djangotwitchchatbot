@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -56,10 +56,11 @@ ROOT_URLCONF = 'helmetbot.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'quotationbot.settings_context_processor.chat_server_settings_context',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -107,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/New_York'
 
 USE_I18N = True
 
@@ -125,6 +126,7 @@ TWITCH_UPTIME_URL = 'https://decapi.me/twitch/uptime/'
 BOT_MINIMUM_WAIT_MINUTES = 60 # default min for a channel
 BOT_MAXIMUM_WAIT_MINUTES = 120 # default max for a channel
 BOT_DEFAULT_BUCKETS = ['wizdum'] #default buckets to split your quotes into
+QUOTE_DEFAULT_BUCKET_NAME = BOT_DEFAULT_BUCKETS[0]
 QUOTATION_TIME_INTERVAL = 5 * 60 #five minutes downtime in between runs. 
 BOT_IGNORE_ERRORS = False # when enabled the bot will ignore runtime exceptions when it can
 

@@ -3,6 +3,50 @@ from django.conf import settings
 from django.utils import timezone
 import requests, re
 
+from django.db import models
+
+class SingletonModel(models.Model):
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super(SingletonModel, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        pass
+
+    @classmethod
+    def load(cls):
+        obj, created = cls.objects.get_or_create(pk=1)
+        return obj
+
+class ChatServerSettings(SingletonModel):
+	next_run_at = models.DateTimeField(auto_now_add=True)
+	twitch_irc_address = models.CharField(default=settings.TWITCH_IRC_ADDRESS, max_length=500)
+	twitch_irc_port = models.CharField(default=settings.TWITCH_IRC_PORT, max_length=500)
+	twitch_handle = models.CharField(default=settings.TWITCH_HANDLE, max_length=500)
+	twitch_oauth_token = models.CharField(default=settings.TWITCH_OAUTH_TOKEN, max_length=1000)
+	chat_server_delay_seconds = models.IntegerField(default=settings.QUOTATION_TIME_INTERVAL)
+
+
+	@classmethod
+	def set_next_run(cls):
+		settings_obj = cls.load()
+		settings_obj = timezone.now() + timezone.timedelta(seconds=settings_obj.chat_server_delay_seconds)
+
+	@classmethod
+	def get_next_run(cls):
+		settings_obj = cls.load()
+		return settings_obj.next_run_at
+
+	@classmethod
+	def get_credentials(cls):
+		settings_obj = cls.load()
+		return (settings_obj.twitch_handle, settings_obj.twitch_oauth_token)
+
+
 class BaseModel(models.Model):
 
     created = models.DateTimeField(
@@ -33,7 +77,7 @@ class BaseModel(models.Model):
 
 class Quotation(BaseModel):
 	text = models.TextField(max_length=settings.TWITCH_IRC_MAX_LENGTH)
-	bucket_name = models.CharField(max_length=100)
+	bucket_name = models.CharField(max_length=100, default = settings.QUOTE_DEFAULT_BUCKET_NAME)
 	approved = models.BooleanField(default=False)
 
 	@property
@@ -66,8 +110,6 @@ class Channel(BaseModel):
 		print(s)
 		three_part_time_regex = re.search(r"(\d+)\s+.*,\s+(\d+)\s+.*,\s+(\d+)", s)
 		two_part_time_regex = re.search(r"(\d+)\s+.*,\s+(\d+)", s)
-		print(three_part_time_regex)
-		print(two_part_time_regex)
 		if three_part_time_regex is None and two_part_time_regex is None:
 			return False
 		if three_part_time_regex:

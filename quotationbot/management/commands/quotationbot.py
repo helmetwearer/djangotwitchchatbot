@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
-from quotationbot.models import Quotation, Channel
+from quotationbot.models import Quotation, Channel, ChatServerSettings
 from django.utils import timezone
 import socket, re, json, argparse, emoji, csv, random, time, sys
 
@@ -9,11 +9,16 @@ class Command(BaseCommand):
     verbose_on = False
     __CURRENT_CHANNEL = None
 
-    def connect(self, username = settings.TWITCH_HANDLE, password = settings.TWITCH_OAUTH_TOKEN):
+    def connect(self, username = None, password = None):
+        settings_obj = ChatServerSettings.load()
+        if username is None:
+            username = settings_obj.twitch_handle
+        if password is None:
+            password = settings_obj.twitch_oauth_token
         self.__NICK = username
         self.__PASS = 'oauth:'+str(password).lstrip('oauth:')
         self.__SOCKET = socket.socket()
-        self.__SOCKET.connect((settings.TWITCH_IRC_ADDRESS, settings.TWITCH_IRC_PORT))
+        self.__SOCKET.connect((settings_obj.twitch_irc_address, int(settings_obj.twitch_irc_port)))
         self.__send_raw('CAP REQ :twitch.tv/tags')
         self.__send_raw('PASS ' + self.__PASS)
         self.__send_raw('NICK ' + self.__NICK)
@@ -82,6 +87,16 @@ class Command(BaseCommand):
                 else:
                     self.verbose_write('%s bucket not enabled on %s' % (bucket_name, channel.name))
 
+    def handle_sleep(self):
+        settings_obj = ChatServerSettings.load()
+        settings_obj.next_run_at = timezone.now() + timezone.timedelta(
+            seconds=settings_obj.chat_server_delay_seconds)
+        settings_obj.save()
+        self.verbose_write('Sleeping for %s seconds to avoid spamming and network overload' % (
+                settings_obj.chat_server_delay_seconds))
+        time.sleep(settings_obj.chat_server_delay_seconds)
+
+
     def handle(self, *args, **options):
         self.verbose_on = options['verbose']
         
@@ -109,7 +124,7 @@ class Command(BaseCommand):
                             raise KeyboardInterrupt
                         except Exception as e:
                             self.stdout.write(self.style.ERROR(str(e)))
-                    time.sleep(settings.QUOTATION_TIME_INTERVAL)
+                    self.handle_sleep()
             except KeyboardInterrupt:
                 self.stdout.write(self.style.SUCCESS('Stopped server. Keyboard interrupt'))
         else:
@@ -117,7 +132,7 @@ class Command(BaseCommand):
                 while True:
                     for bucket in self.buckets:
                         self.broadcast_available_messages(bucket)
-                    time.sleep(settings.QUOTATION_TIME_INTERVAL)
+                    self.handle_sleep()
             except KeyboardInterrupt:
                 self.stdout.write(self.style.SUCCESS('Stopped server. Keyboard interrupt'))
 

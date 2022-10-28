@@ -9,7 +9,6 @@ class QuotationAdmin(admin.ModelAdmin):
     
 admin.site.register(Quotation, QuotationAdmin)
 
-
 def set_channels_to_run(modeladmin, request, queryset):
     for channel in queryset:
         channel.mark_to_run()
@@ -23,5 +22,10 @@ class ChannelAdmin(admin.ModelAdmin):
 
     actions = [set_channels_to_run, ]
 
-    
 admin.site.register(Channel, ChannelAdmin)
+
+class ChatServerSettingsAdmin(admin.ModelAdmin):
+    readonly_fields = ["next_run_at"]
+
+
+admin.site.register(ChatServerSettings, ChatServerSettingsAdmin)

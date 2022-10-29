@@ -130,6 +130,10 @@ QUOTE_DEFAULT_BUCKET_NAME = BOT_DEFAULT_BUCKETS[0]
 QUOTATION_TIME_INTERVAL = 5 * 60 #five minutes downtime in between runs. 
 BOT_IGNORE_ERRORS = False # when enabled the bot will ignore runtime exceptions when it can
 
+NEEDY_GF_URL = 'http://127.0.0.1:1337/message'
+NEEDY_GF_BEDTIME_HOUR = 21
+NEEDY_GF_WAKING_HOUR = 7
+
 #default 10 minute uptime before channel considered 'live'
 MINIMUM_CHANNEL_UPTIME_SECONDS = 10 * 60
 # Static files (CSS, JavaScript, Images)

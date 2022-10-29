@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 from quotationbot.models import Quotation, Channel, ChatServerSettings
 from django.utils import timezone
-import socket, re, json, argparse, emoji, csv, random, time, sys
+import socket, re, json, argparse, emoji, csv, random, time, sys, requests
 
 class Command(BaseCommand):
     help = 'Runs the chatbot server'
@@ -63,12 +63,24 @@ class Command(BaseCommand):
         count = quotations.count()
         if count:
             q = quotations[random.randrange(0,count)]
-            self.connect()
-            self.verbose_write('IRC connection established')
-            self.send_message(channel.name, q.formatted_text)
-            self.verbose_write('Message sent to %s was %s' %(channel.name, q.formatted_text))   
-            self.close_connection()
-            self.verbose_write('Connection closed')
+
+            if channel.is_needy_gf_channel:
+                self.verbose_write('Needy gf channel detected')
+
+                results = requests.post(settings.NEEDY_GF_URL, 
+                    data={'phone':channel.name, 'message':q.formatted_text})
+
+                if results.status_code == 200:
+                    self.verbose_write('Needy GF message sent to %s was %s' %(channel.name, q.formatted_text))
+                else:
+                    self.verbose_write('HTTP %s %s' % (results.status_code, results.text))
+            else:
+                self.connect()
+                self.verbose_write('IRC connection established')
+                self.send_message(channel.name, q.formatted_text)
+                self.verbose_write('Message sent to %s was %s' %(channel.name, q.formatted_text))   
+                self.close_connection()
+                self.verbose_write('Connection closed')
 
 
     def broadcast_available_messages(self, bucket_name):

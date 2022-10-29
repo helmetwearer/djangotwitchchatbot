@@ -3,7 +3,7 @@
 You must be running on OSX. You need this app:
 [Needy GF Server](https://github.com/helmetwearer/needy_gf_server)
 
-download it, and double click the app, that's it. The rest you can configure in this bot.
+download it, and double click the app, when it asks for permissions say yes. That's it. The rest you can configure in this bot.
 
 To add a needy girlfriend channel:
 Name should be the phonenumber i.e. 1231231234

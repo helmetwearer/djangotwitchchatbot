@@ -1,16 +1,16 @@
 #NEEDY GF EXTENTION USERS:
 
-    You must be running on OSX. You need this app:
-    [Needy GF Server](https://github.com/helmetwearer/needy_gf_server)
+You must be running on OSX. You need this app:
+[Needy GF Server](https://github.com/helmetwearer/needy_gf_server)
 
-    download it, and double click the app, that's it. The rest you can configure in this bot.
+download it, and double click the app, that's it. The rest you can configure in this bot.
 
-    To add a needy girlfriend channel:
-    Name should be the phonenumber i.e. 1231231234
-    Check the "Is needy gf channel" checkbox
-    Check the "Bots enabled" checkbox as well.
-    Do yourself a favor and don't make it fo faster than 5 minutes. A chain message feature is in the works that will allow burst behavior.
-    If you want emotes copy/paste them out of the message app into the quotes.
+To add a needy girlfriend channel:
+Name should be the phonenumber i.e. 1231231234
+Check the "Is needy gf channel" checkbox
+Check the "Bots enabled" checkbox as well.
+Do yourself a favor and don't make it fo faster than 5 minutes. A chain message feature is in the works that will allow burst behavior.
+If you want emotes copy/paste them out of the message app into the quotes.
 
 #Dev Note
 Working on getting this in a docker
@@ -36,15 +36,15 @@ Run the web server:
 
 (for production webserver this is a great guide): 
 
-    [Unix setup guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-django-with-postgres-nginx-and-gunicorn)
+[Unix setup guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-django-with-postgres-nginx-and-gunicorn)
 
 and you should probably include supervisord with that:
 
-    [Daemonize stuff](https://www.agiliq.com/blog/2014/05/supervisor-with-django-and-gunicorn/)
+[Daemonize stuff](https://www.agiliq.com/blog/2014/05/supervisor-with-django-and-gunicorn/)
 
 Go to the admin and login:
 
-    [Localhost admin url](http://127.0.0.1:8000/admin)
+[Localhost admin url](http://127.0.0.1:8000/admin)
 
 For each channel you want the bot to monitor, create a channel object
 

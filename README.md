@@ -13,7 +13,7 @@ Check the "Is needy gf channel" checkbox
 
 Check the "Bots enabled" checkbox as well.
 
-Do yourself a favor and don't make it fo faster than 5 minutes. A chain message feature is in the works that will allow burst behavior.
+Do yourself a favor and don't make it go faster than 5 minutes. A chain message feature is in the works that will allow burst behavior.
 
 If you want emotes copy/paste them out of the message app into the quotes.
 

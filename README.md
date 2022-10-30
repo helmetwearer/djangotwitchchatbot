@@ -80,6 +80,7 @@ If no bucket names are passed it will use the setting BOT_DEFAULT_BUCKETS
 
 [For bot specific configurables check the settings](https://github.com/helmetwearer/djangotwitchchatbot/blob/main/helmetbot/settings.py#L116)
 
+[Some of the configurables like twitch tokens can be set in the app here](http://127.0.0.1:8000/admin/quotationbot/chatserversettings/1/change/)
 Highly encouraged to use a local_settings.py file for stuff like:
 
     TWITCH_HANDLE = 'your_twitch_user_name'

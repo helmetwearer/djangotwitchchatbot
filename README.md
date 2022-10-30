@@ -1,4 +1,4 @@
-#NEEDY GF EXTENTION USERS:
+# NEEDY GF EXTENTION USERS:
 
 You must be running on OSX. You need this app:
 [Needy GF Server](https://github.com/helmetwearer/needy_gf_server)
@@ -17,17 +17,17 @@ Do yourself a favor and don't make it go faster than 5 minutes. A chain message 
 
 If you want emotes copy/paste them out of the message app into the quotes.
 
-#Dev Note
+# Dev Note
 Working on getting this in a docker
 
-#Twitch Bot Notes
+# Twitch Bot Notes
 A note about streamer follower settings and how IRC interaction is implemented. You will have to log into twitch, follow some channels, and actually interact with the web GUI (or perhaps mobile chat would suffice haven't tested). I'm not fixing that, and that's not a lack of technology decision it's an intentional barrier. I highly recommend you use a verified account with your mobile number and have 2FA on.
 
 This app needs documentation still. Initial code checkin, will add later.
 
-#Setup Notes
+# Setup Notes
 
-Install the reqs (probably should set up a virtualenv etc):
+Install the reqs [probably should set up a virtualenv etc](https://docs.python.org/3/library/venv.html):
 
     pip install -r requirements.txt
 
@@ -39,7 +39,7 @@ Run the web server:
 
     ./manage.py runserver
 
-(for production webserver this is a great guide): 
+For a production webserver this is a great guide: 
 
 [Unix setup guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-django-with-postgres-nginx-and-gunicorn)
 
@@ -55,9 +55,11 @@ For each channel you want the bot to monitor, create a channel object
 
 name should be the exact handle of the twitch channel you want to run the bot in
 
-you must check "bots enabled" to actively scan the channel. Useful for quick and immediate takedown.
+you must check "bots enabled" to actively scan the channel. Useful for quick and immediate takedown without having to delete.
 
 the bot will send a message at a random interval between the minimum and maximum minutes set.
+however if you set the minimum less than the setting QUOTATION_TIME_INTERVAL don't expect it to work. If you don't know how to change the setting, it's
+probably best you can't go lower
 
 
 For each Quotation you will have to specify a bucketname. This allows us to put quotes into different
@@ -76,9 +78,7 @@ or
 
 If no bucket names are passed it will use the setting BOT_DEFAULT_BUCKETS
 
-For bot specific configurables check the settings here:
-
-    https://github.com/helmetwearer/djangotwitchchatbot/blob/main/helmetbot/settings.py#L116
+[For bot specific configurables check the settings](https://github.com/helmetwearer/djangotwitchchatbot/blob/main/helmetbot/settings.py#L116)
 
 Highly encouraged to use a local_settings.py file for stuff like:
 

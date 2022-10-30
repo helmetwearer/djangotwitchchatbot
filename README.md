@@ -1,7 +1,31 @@
+#NEEDY GF EXTENTION USERS:
+
+You must be running on OSX. You need this app:
+[Needy GF Server](https://github.com/helmetwearer/needy_gf_server)
+
+download it, and double click the app, when it asks for permissions say yes. That's it. The rest you can configure in this bot.
+
+To add a needy girlfriend channel:
+
+Name should be the phonenumber i.e. 1231231234
+
+Check the "Is needy gf channel" checkbox
+
+Check the "Bots enabled" checkbox as well.
+
+Do yourself a favor and don't make it go faster than 5 minutes. A chain message feature is in the works that will allow burst behavior.
+
+If you want emotes copy/paste them out of the message app into the quotes.
+
+#Dev Note
+Working on getting this in a docker
+
+#Twitch Bot Notes
 A note about streamer follower settings and how IRC interaction is implemented. You will have to log into twitch, follow some channels, and actually interact with the web GUI (or perhaps mobile chat would suffice haven't tested). I'm not fixing that, and that's not a lack of technology decision it's an intentional barrier. I highly recommend you use a verified account with your mobile number and have 2FA on.
 
 This app needs documentation still. Initial code checkin, will add later.
 
+#Setup Notes
 
 Install the reqs (probably should set up a virtualenv etc):
 
@@ -17,15 +41,15 @@ Run the web server:
 
 (for production webserver this is a great guide): 
 
-    https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-django-with-postgres-nginx-and-gunicorn)
+[Unix setup guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-django-with-postgres-nginx-and-gunicorn)
 
 and you should probably include supervisord with that:
 
-    https://www.agiliq.com/blog/2014/05/supervisor-with-django-and-gunicorn/
+[Daemonize stuff](https://www.agiliq.com/blog/2014/05/supervisor-with-django-and-gunicorn/)
 
 Go to the admin and login:
 
-    http://127.0.0.1:8000/admin
+[Localhost admin url](http://127.0.0.1:8000/admin)
 
 For each channel you want the bot to monitor, create a channel object
 

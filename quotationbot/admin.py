@@ -6,6 +6,7 @@ class QuotationAdmin(admin.ModelAdmin):
     fields = ('bucket_name', 'text', 'approved')
     list_display = ('id', 'bucket_name', 'text', 'approved')
     search_fields = ('bucket_name', 'text')
+    list_filter = ('bucket_name', 'approved')
     
 admin.site.register(Quotation, QuotationAdmin)
 
@@ -22,6 +23,7 @@ class ChannelAdmin(admin.ModelAdmin):
         'bot_maximum_minutes', 'available_to_message_after')
     search_fields = ('name',)
     readonly_fields = ["available_to_message_after"]
+    list_filter = ('bots_enabled', 'is_needy_gf_channel')
 
     actions = [set_channels_to_run, ]
 

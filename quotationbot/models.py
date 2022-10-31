@@ -30,6 +30,8 @@ class ChatServerSettings(SingletonModel):
 	twitch_oauth_token = models.CharField(default=settings.TWITCH_OAUTH_TOKEN, max_length=1000)
 	chat_server_delay_seconds = models.IntegerField(default=settings.QUOTATION_TIME_INTERVAL)
 
+	def __str__(self):
+		return 'Chat server settings'
 
 	@classmethod
 	def set_next_run(cls):
@@ -45,6 +47,9 @@ class ChatServerSettings(SingletonModel):
 	def get_credentials(cls):
 		settings_obj = cls.load()
 		return (settings_obj.twitch_handle, settings_obj.twitch_oauth_token)
+
+	class Meta:
+		verbose_name_plural = "Chat server settings"
 
 
 class BaseModel(models.Model):
@@ -80,6 +85,9 @@ class Quotation(BaseModel):
 	bucket_name = models.CharField(max_length=100, default = settings.QUOTE_DEFAULT_BUCKET_NAME)
 	approved = models.BooleanField(default=False)
 
+	def __str__(self):
+		return self.bucket_name
+
 	@property
 	def formatted_text(self):
 		formatted = str(self.text)
@@ -100,6 +108,9 @@ class Channel(BaseModel):
 	available_to_message_after = models.DateTimeField(auto_now_add=True)
 	enabled_buckets = models.TextField(default=default_enabled_buckets())
 	is_needy_gf_channel = models.BooleanField(default=False)
+
+	def __str__(self):
+		return self.name 
 
 	def is_bucket_enabled(self, bucket_name):
 		return bucket_name in self.enabled_buckets.split()

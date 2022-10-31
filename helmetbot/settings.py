@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-@*#jqr8mkdvxx^gog!0h41$(t23(vxurn5-!)tsklc!gn14=_*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -132,7 +131,7 @@ BOT_IGNORE_ERRORS = False # when enabled the bot will ignore runtime exceptions 
 
 NEEDY_GF_URL = 'http://127.0.0.1:1337/message'
 NEEDY_GF_BEDTIME_HOUR = 21
-NEEDY_GF_WAKING_HOUR = 7
+NEEDY_GF_WAKING_HOUR = 10
 
 #default 10 minute uptime before channel considered 'live'
 MINIMUM_CHANNEL_UPTIME_SECONDS = 10 * 60

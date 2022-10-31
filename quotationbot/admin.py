@@ -18,7 +18,8 @@ class ChannelAdmin(admin.ModelAdmin):
 
     fields = ('name', 'bots_enabled', 'bot_minimum_minutes', 'bot_maximum_minutes', 'enabled_buckets',
         'is_needy_gf_channel', 'available_to_message_after')
-    list_display = ('id', 'name', 'bots_enabled', 'is_needy_gf_channel', 'available_to_message_after')
+    list_display = ('id', 'name', 'bots_enabled', 'is_needy_gf_channel', 'bot_minimum_minutes',
+        'bot_maximum_minutes', 'available_to_message_after')
     search_fields = ('name',)
     readonly_fields = ["available_to_message_after"]
 

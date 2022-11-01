@@ -1,45 +1,13 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 from quotationbot.models import Quotation, Channel, ChatServerSettings
+from quotationbot.mixins import IRCMixin
 from django.utils import timezone
-import socket, re, json, argparse, emoji, csv, random, time, sys, requests
+import re, json, argparse, random, time, sys, requests
 
-class Command(BaseCommand):
+class Command(BaseCommand, IRCMixin):
     help = 'Runs the chatbot server'
     verbose_on = False
-    __CURRENT_CHANNEL = None
-
-    def connect(self, username = None, password = None):
-        settings_obj = ChatServerSettings.load()
-        if username is None:
-            username = settings_obj.twitch_handle
-        if password is None:
-            password = settings_obj.twitch_oauth_token
-        self.__NICK = username
-        self.__PASS = 'oauth:'+str(password).lstrip('oauth:')
-        self.__SOCKET = socket.socket()
-        self.__SOCKET.connect((settings_obj.twitch_irc_address, int(settings_obj.twitch_irc_port)))
-        self.__send_raw('CAP REQ :twitch.tv/tags')
-        self.__send_raw('PASS ' + self.__PASS)
-        self.__send_raw('NICK ' + self.__NICK)
-    
-    def __send_raw(self, string):
-        self.__SOCKET.send((string+'\r\n').encode('utf-8'))
-
-    def __join_channel(self,channel_name):
-        channel_lower = channel_name.lower()
-
-        if(self.__CURRENT_CHANNEL != channel_lower):
-            self.__send_raw('JOIN #{}'.format(channel_lower))
-            self.__CURRENT_CHANNEL = channel_lower
-
-    def close_connection(self):
-        self.__SOCKET.close()
-
-    def send_message(self, channel_name, message):
-        self.__join_channel(channel_name)
-        self.__send_raw('PRIVMSG #{} :{}'.format(channel_name.lower(),message))
-
 
     def add_arguments(self, parser):
         parser.add_argument('bucket_names', nargs='*', type=str)

@@ -18,12 +18,12 @@ set_channels_to_run.short_description = 'Mark selected to run now'
 class ChannelAdmin(admin.ModelAdmin):
 
     fields = ('name', 'bots_enabled', 'bot_minimum_minutes', 'bot_maximum_minutes', 'enabled_buckets',
-        'is_needy_gf_channel', 'available_to_message_after')
-    list_display = ('id', 'name', 'bots_enabled', 'is_needy_gf_channel', 'bot_minimum_minutes',
+        'is_imessage_server', 'available_to_message_after')
+    list_display = ('id', 'name', 'bots_enabled', 'is_imessage_server', 'bot_minimum_minutes',
         'bot_maximum_minutes', 'available_to_message_after')
     search_fields = ('name',)
     readonly_fields = ["available_to_message_after"]
-    list_filter = ('bots_enabled', 'is_needy_gf_channel')
+    list_filter = ('bots_enabled', 'is_imessage_server')
 
     actions = [set_channels_to_run, ]
 

@@ -32,11 +32,11 @@ class Command(BaseCommand, IRCMixin):
         count = quotations.count()
         if count and channel.is_bucket_enabled(bucket_name):
             q = quotations[random.randrange(0,count)]
-            results = requests.post(settings.NEEDY_GF_URL, 
+            results = requests.post(settings.IMESSAGE_SERVICE_URL, 
                         data={'phone':channel.name, 'message':q.formatted_text})
 
             if results.status_code == 200:
-                self.verbose_write('Needy GF message sent to %s was %s' %(channel.name, q.formatted_text))
+                self.verbose_write('Imessage sent to %s was %s' %(channel.name, q.formatted_text))
             else:
                 self.verbose_write('HTTP %s %s' % (results.status_code, results.text))
 
@@ -57,8 +57,8 @@ class Command(BaseCommand, IRCMixin):
     def broadcast_available_messages(self, bucket_name):
         available_channels = Channel.objects.filter(
             bots_enabled=True,available_to_message_after__lte=timezone.now())
-        twitch_channels = available_channels.filter(is_needy_gf_channel=False)
-        imessage_channels = available_channels.filter(is_needy_gf_channel=True)
+        twitch_channels = available_channels.filter(is_imessage_server=False)
+        imessage_channels = available_channels.filter(is_imessage_server=True)
         self.verbose_write('Number of twitch channels to write to %s' % twitch_channels.count())
         for channel in twitch_channels:
             self.verbose_write('checking channel %s' % channel.name)

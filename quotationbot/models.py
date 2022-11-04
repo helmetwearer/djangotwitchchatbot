@@ -107,7 +107,7 @@ class Channel(BaseModel):
 	bot_maximum_minutes = models.IntegerField(default=settings.BOT_MAXIMUM_WAIT_MINUTES)
 	available_to_message_after = models.DateTimeField(auto_now_add=True)
 	enabled_buckets = models.TextField(default=default_enabled_buckets())
-	is_needy_gf_channel = models.BooleanField(default=False)
+	is_imessage_server = models.BooleanField(default=False)
 
 	def __str__(self):
 		return self.name 
@@ -117,7 +117,7 @@ class Channel(BaseModel):
 
 	@property
 	def is_live(self):
-		if self.is_needy_gf_channel:
+		if self.is_imessage_server:
 			return self.is_waking_hour
 		
 		r = requests.get(url=settings.TWITCH_UPTIME_URL+self.name)
@@ -143,12 +143,12 @@ class Channel(BaseModel):
 	@property
 	def is_waking_hour(self):
 	    now_time = timezone.localtime(timezone.now()).time()
-	    if int(settings.NEEDY_GF_BEDTIME_HOUR) < int(settings.NEEDY_GF_WAKING_HOUR):
-	        return not (datetime.time(settings.NEEDY_GF_BEDTIME_HOUR,0
-	        	) <= now_time <= datetime.time(settings.NEEDY_GF_WAKING_HOUR,0))
+	    if int(settings.IMESSAGE_BEDTIME_HOUR) < int(settings.IMESSAGE_WAKING_HOUR):
+	        return not (datetime.time(settings.IMESSAGE_BEDTIME_HOUR,0
+	        	) <= now_time <= datetime.time(settings.IMESSAGE_WAKING_HOUR,0))
 	    else:
-	        return (datetime.time(settings.NEEDY_GF_WAKING_HOUR,
-	        	0) <= now_time <= datetime.time(settings.NEEDY_GF_BEDTIME_HOUR,0))
+	        return (datetime.time(settings.IMESSAGE_WAKING_HOUR,
+	        	0) <= now_time <= datetime.time(settings.IMESSAGE_BEDTIME_HOUR,0))
 
 	def mark_to_run(self):
 		self.available_to_message_after = timezone.now()

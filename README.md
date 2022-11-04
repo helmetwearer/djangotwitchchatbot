@@ -1,22 +1,3 @@
-# NEEDY GF EXTENTION USERS:
-
-You must be running on OSX. You need this app:
-[Needy GF Server](https://github.com/helmetwearer/needy_gf_server)
-
-download it, and double click the app, when it asks for permissions say yes. That's it. The rest you can configure in this bot.
-
-To add a needy girlfriend channel:
-
-Name should be the phonenumber i.e. 1231231234
-
-Check the "Is needy gf channel" checkbox
-
-Check the "Bots enabled" checkbox as well.
-
-Do yourself a favor and don't make it go faster than 5 minutes. A chain message feature is in the works that will allow burst behavior.
-
-If you want emotes copy/paste them out of the message app into the quotes.
-
 # Dev Note
 Working on getting this in a docker
 
@@ -86,3 +67,22 @@ Highly encouraged to use a local_settings.py file for stuff like:
 
     TWITCH_HANDLE = 'your_twitch_user_name'
     TWITCH_OAUTH_TOKEN = 'go here to get an oauth token: https://twitchapps.com/tmi/'
+
+# NEEDY GF EXTENTION USERS:
+
+You must be running on OSX. You need this app:
+[Needy GF Server](https://github.com/helmetwearer/needy_gf_server)
+
+download it, and double click the app, when it asks for permissions say yes. That's it. The rest you can configure in this bot.
+
+To add a needy girlfriend channel:
+
+Name should be the phonenumber i.e. 1231231234
+
+Check the "Is needy gf channel" checkbox
+
+Check the "Bots enabled" checkbox as well.
+
+Do yourself a favor and don't make it go faster than 5 minutes. A chain message feature is in the works that will allow burst behavior.
+
+If you want emotes copy/paste them out of the message app into the quotes.

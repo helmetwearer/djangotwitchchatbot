@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 import requests, re, datetime
-
+from django.utils.safestring import mark_safe
 from django.db import models
 
 class SingletonModel(models.Model):

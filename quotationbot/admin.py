@@ -1,6 +1,21 @@
 from django.contrib import admin
 from .models import *
 # Register your models here.
+from django.urls import path
+from django.views.decorators.cache import never_cache
+import re
+
+class CustomAdminSite(admin.AdminSite):
+    site_header = 'Custom Admin Site'
+    site_title = 'Custom Admin Site'
+
+    def get_urls(self):
+        urlpatterns = super().get_urls()
+        urlpatterns.insert(0, path('chatbot/', self.admin_view(self.index), name='chatbot_index'))
+        return urlpatterns
+
+# Register your models with the custom admin site
+custom_admin_site = CustomAdminSite(name='custom_admin')
 
 class QuotationAdmin(admin.ModelAdmin):
     fields = ('bucket_name', 'text', 'approved')
@@ -9,7 +24,7 @@ class QuotationAdmin(admin.ModelAdmin):
     list_filter = ('bucket_name', 'approved')
     
 admin.site.register(Quotation, QuotationAdmin)
-
+custom_admin_site.register(Quotation, QuotationAdmin)
 def set_channels_to_run(modeladmin, request, queryset):
     for channel in queryset:
         channel.mark_to_run()
@@ -41,9 +56,10 @@ class ChannelAdmin(admin.ModelAdmin):
     actions = [set_channels_to_run, disable_selected_channels, enable_selected_channels]
 
 admin.site.register(Channel, ChannelAdmin)
-
+custom_admin_site.register(Channel, ChannelAdmin)
 class ChatServerSettingsAdmin(admin.ModelAdmin):
     readonly_fields = ["next_run_at"]
 
 
 admin.site.register(ChatServerSettings, ChatServerSettingsAdmin)
+custom_admin_site.register(ChatServerSettings, ChatServerSettingsAdmin)

@@ -19,9 +19,7 @@ from django.urls import path, include
 from .mainviews import readme
 
 urlpatterns = [
-    path('grappelli/', include('grappelli.urls')), # grappelli URLS
-    path('admin/', admin.site.urls),
-    path('chatbot/admin/', custom_admin_site.urls),
-    path('chatbot/grappelli/', include('grappelli.urls')),
+    path('chatbot/grappelli/', include('grappelli.urls')), # grappelli URLS
+    path('chatbot/admin/', admin.site.urls),
     path('', readme),
 ]

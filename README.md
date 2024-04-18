@@ -1,3 +1,80 @@
+# Django Twitch Chat Bot Readme
+
+## This project has a Docker Container. You don't need to be a coder to get a copy running. Follow these instructions
+
+### Prerequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop) installed on your local machine.
+- [Optionally install Git](https://git-scm.com/) on your local machine.
+
+### Running the Application
+
+1. [Download the source code and unzip](https://github.com/helmetwearer/djangotwitchchatbot/archive/refs/heads/main.zip)
+
+   or Clone this repository to your local machine using http.
+
+    ```bash
+    git clone https://github.com/helmetwearer/djangotwitchchatbot.git
+    ```
+
+2. Navigate to the project directory.
+
+    ```bash
+    cd /path/to/source/djangotwitchchatbot
+    ```
+
+3. Run the following command to start the application:
+
+    ```bash
+    docker-compose up
+    ```
+
+4. Once the containers are running, open your web browser and navigate to [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin).
+
+5. Log in with the following credentials:
+
+    - Username: `django`
+    - Password: `ChangeThisPassword`
+
+6. Visit [http://127.0.0.1:8000/admin/quotationbot/chatserversettings/1/change/](http://127.0.0.1:8000/admin/quotationbot/chatserversettings/1/change/).
+
+7. Change the field "Twitch handle" to your Twitch username.
+
+8. Go to [https://twitchapps.com/tmi/](https://twitchapps.com/tmi/) and hit the connect link. Then paste the result in the field named "Twitch oauth token".
+
+9. Hit save.
+
+### Creating Quotations
+
+1. Go to [http://127.0.0.1:8000/admin/quotationbot/quotation/](http://127.0.0.1:8000/admin/quotationbot/quotation/).
+
+2. Click on "Add Quotation" in the top right corner.
+
+3. Leave the "Bucket name" field empty unless you want to set advanced coding configurations.
+
+4. Enter the text of your quotation in the "Text" field.
+
+5. Check "Approved" for the message to be available as a random message to the bot.
+
+6. Click on "Save".
+
+### Adding Twitch Channels
+
+1. Go to [http://127.0.0.1:8000/admin/quotationbot/channel/](http://127.0.0.1:8000/admin/quotationbot/channel/).
+
+2. Click on "Add Channel" in the top right corner.
+
+3. Put the full streamer name in the "Name" field.
+
+4. Check "Bots Enabled" for the channel to receive messages from the bot.
+
+5. Optionally set a minimum and maximum minute frequency of messages in the appropriate fields.
+
+6. Click on "Save".
+
+
+# THE REST OF THE SECTIONS BELOW ARE INTENDED FOR CODERS AND CONTRIBUTORS
+
 # IMESSAGE SERVER EXTENTION USERS:
 
 You must be running on OSX. You need this app:

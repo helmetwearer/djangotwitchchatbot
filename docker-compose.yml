@@ -22,7 +22,7 @@ services:
     volumes:
       - .:/mnt/django_app
     env_file: ./docker_conf/.dev.env
-    shm_size: 1g
+    shm_size: 2g
     ports:
       - 5432:5432
 

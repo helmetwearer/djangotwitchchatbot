@@ -1,5 +1,5 @@
 # pull official base image
-FROM ubuntu:latest
+FROM ubuntu:22.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 # install psycopg2 dependencies

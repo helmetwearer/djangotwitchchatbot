@@ -40,7 +40,7 @@
 
 7. Change the field "Twitch handle" to your Twitch username.
 
-8. Go to [https://twitchapps.com/tmi/](https://twitchapps.com/tmi/) and hit the connect link. Then paste the result in the field named "Twitch oauth token".
+8. Go to [https://antiscuff.com/oauth/](https://antiscuff.com/oauth/) and hit the connect link. Then paste the result in the field named "Twitch oauth token".
 
 9. Hit save.
 
@@ -162,4 +162,4 @@ If no bucket names are passed it will use the setting BOT_DEFAULT_BUCKETS
 Highly encouraged to use a local_settings.py file for stuff like:
 
     TWITCH_HANDLE = 'your_twitch_user_name'
-    TWITCH_OAUTH_TOKEN = 'go here to get an oauth token: https://twitchapps.com/tmi/'
+    TWITCH_OAUTH_TOKEN = 'go here to get an oauth token: https://antiscuff.com/oauth/'

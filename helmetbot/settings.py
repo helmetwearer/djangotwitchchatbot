@@ -124,7 +124,7 @@ USE_TZ = True
 TWITCH_IRC_ADDRESS = 'irc.chat.twitch.tv'
 TWITCH_IRC_PORT = 6667
 TWITCH_HANDLE = 'your_twitch_user_name'
-TWITCH_OAUTH_TOKEN = 'go here to get an oauth token: https://twitchapps.com/tmi/'
+TWITCH_OAUTH_TOKEN = 'go here to get an oauth token: https://antiscuff.com/oauth/'
 TWITCH_IRC_MAX_LENGTH = 500 #this length probably needs to be tested
 TWITCH_UPTIME_URL = 'https://decapi.me/twitch/uptime/'
 
